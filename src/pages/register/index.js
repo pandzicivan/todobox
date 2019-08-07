@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import style from './register.module.scss';
-import { Formik, Form, Field } from 'formik';
+import {Formik, Form, Field} from 'formik';
 import * as yup from 'yup';
 import withTranslations from '../../hoc/with-translations';
 
@@ -20,23 +20,23 @@ class Register extends React.Component {
           }}
           validationSchema={yup.object().shape({
             firstName: yup.string()
-              .required(this.props.translate('form_field_required'))
-              .min(2, `${this.props.translate('form_field_min_length')} 2`),
+                .required(this.props.translate('form_field_required'))
+                .min(2, `${this.props.translate('form_field_min_length')} 2`),
             lastName: yup.string()
-              .required('Required')
-              .min(2, `${this.props.translate('form_field_min_length')} 2`),
+                .required('Required')
+                .min(2, `${this.props.translate('form_field_min_length')} 2`),
             email: yup.string()
-              .required(this.props.translate('form_field_required'))
-              .email(this.props.translate('form_field_invalid_email')),
+                .required(this.props.translate('form_field_required'))
+                .email(this.props.translate('form_field_invalid_email')),
             password: yup.string()
-              .required(this.props.translate('form_field_required'))
-              .min(6, `${this.props.translate('form_field_min_length')} 6`),
+                .required(this.props.translate('form_field_required'))
+                .min(6, `${this.props.translate('form_field_min_length')} 6`),
             repeatPassword: yup.string()
-              .required(this.props.translate('form_field_required'))
-              .min(6, `${this.props.translate('form_field_min_length')} 6`)
-              .oneOf([yup.ref('password'), null], this.props.translate('form_field_password_mismatch'))
+                .required(this.props.translate('form_field_required'))
+                .min(6, `${this.props.translate('form_field_min_length')} 6`)
+                .oneOf([yup.ref('password'), null], this.props.translate('form_field_password_mismatch')),
           })}
-          onSubmit={values => {
+          onSubmit={(values) => {
             console.log(values);
           }}>
           {({values, errors, touched, handleBlur, handleChange}) => (
@@ -128,7 +128,7 @@ class Register extends React.Component {
           )}
         </Formik>
       </div>
-    )
+    );
   }
 }
 

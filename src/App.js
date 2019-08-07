@@ -1,8 +1,8 @@
 import React from 'react';
-import { Provider } from 'react-redux'
-import { store } from './store/store';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import {Provider} from 'react-redux';
+import {store} from './store/store';
+import {createMuiTheme} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/styles';
 import indigo from '@material-ui/core/colors/indigo';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import red from '@material-ui/core/colors/red';

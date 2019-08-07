@@ -1,15 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => (
   {
-    translations: state.translations
+    translations: state.translations,
   }
 );
 
 function withTranslations(WrappedComponent) {
   return class Register extends React.Component {
-
     translate = (key) => {
       return this.props.translations[key] || key;
     }
@@ -17,12 +16,12 @@ function withTranslations(WrappedComponent) {
     render() {
       return (
         <WrappedComponent translate={this.translate} {...this.props} />
-      )
+      );
     }
-  }
+  };
 }
 
 export default (WrappedComponent) => connect(
-  mapStateToProps,
-  null
+    mapStateToProps,
+    null
 )(withTranslations(WrappedComponent));
