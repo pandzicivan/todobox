@@ -1,4 +1,6 @@
 import React from 'react';
+import { Provider } from 'react-redux'
+import { store } from './store/store';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import indigo from '@material-ui/core/colors/indigo';
@@ -20,12 +22,14 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-        <Register />
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+          </header>
+          <Register />
+        </div>
+      </Provider>
     </ThemeProvider>
   );
 }

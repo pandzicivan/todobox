@@ -4,26 +4,7 @@ import Button from '@material-ui/core/Button';
 import style from './register.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
-
-//TODO: Replace hardcoded translations
-const validationSchema = yup.object().shape({
-  firstName: yup.string()
-    .required('Required')
-    .min(2, 'Min 2'),
-  lastName: yup.string()
-    .required('Required')
-    .min(2, 'Min 2'),
-  email: yup.string()
-    .email()
-    .required('Required'),
-  password: yup.string()
-    .required('Required')
-    .min(6, 'Min 6'),
-  repeatPassword: yup.string()
-    .required('Required')
-    .min(6, 'Min 6')
-    .oneOf([yup.ref('password'), null], "Passwords must match")
-});
+import withTranslations from '../../hoc/with-translations';
 
 class Register extends React.Component {
   render() {
@@ -37,7 +18,24 @@ class Register extends React.Component {
             password: '',
             repeatPassword: '',
           }}
-          validationSchema={validationSchema}
+          validationSchema={yup.object().shape({
+            firstName: yup.string()
+              .required(this.props.translate('form_field_required'))
+              .min(2, `${this.props.translate('form_field_min_length')} 2`),
+            lastName: yup.string()
+              .required('Required')
+              .min(2, `${this.props.translate('form_field_min_length')} 2`),
+            email: yup.string()
+              .required(this.props.translate('form_field_required'))
+              .email(this.props.translate('form_field_invalid_email')),
+            password: yup.string()
+              .required(this.props.translate('form_field_required'))
+              .min(6, `${this.props.translate('form_field_min_length')} 6`),
+            repeatPassword: yup.string()
+              .required(this.props.translate('form_field_required'))
+              .min(6, `${this.props.translate('form_field_min_length')} 6`)
+              .oneOf([yup.ref('password'), null], this.props.translate('form_field_password_mismatch'))
+          })}
           onSubmit={values => {
             console.log(values);
           }}>
@@ -49,7 +47,7 @@ class Register extends React.Component {
                 id="firstName"
                 name="firstName"
                 margin="dense"
-                label="translation.first_name"
+                label={this.props.translate('register_first_name')}
                 value={values.firstName}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -64,12 +62,12 @@ class Register extends React.Component {
                 id="lastName"
                 name="lastName"
                 margin="dense"
-                label="translation.last_name"
+                label={this.props.translate('register_last_name')}
                 value={values.lastName}
                 onBlur={handleBlur}
                 onChange={handleChange}
                 error={errors.lastName && touched.lastName}
-                helperText={(errors.firstName && touched.firstName) && errors.firstName}
+                helperText={(errors.lastName && touched.lastName) && errors.lastName}
                 variant="outlined"
                 fullWidth
               />
@@ -79,7 +77,7 @@ class Register extends React.Component {
                 id="email"
                 name="email"
                 margin="dense"
-                label="translation.email"
+                label={this.props.translate('register_email')}
                 value={values.email}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -94,7 +92,7 @@ class Register extends React.Component {
                 id="password"
                 name="password"
                 margin="dense"
-                label="translation.password"
+                label={this.props.translate('register_password')}
                 value={values.password}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -109,7 +107,7 @@ class Register extends React.Component {
                 id="repeatPassword"
                 name="repeatPassword"
                 margin="dense"
-                label="translation.repeat_password"
+                label={this.props.translate('register_repeat_password')}
                 value={values.repeatPassword}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -124,7 +122,7 @@ class Register extends React.Component {
                 size="large"
                 type="submit"
                 fullWidth>
-                translation.register
+                {this.props.translate('register_register')}
               </Button>
             </Form>
           )}
@@ -134,4 +132,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default withTranslations(Register);
