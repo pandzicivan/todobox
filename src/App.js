@@ -8,6 +8,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import red from '@material-ui/core/colors/red';
 import Register from './pages/register';
 import logo from './logo.svg';
+import { ToastProvider } from 'react-toast-notifications';
 
 const theme = createMuiTheme({
   palette: {
@@ -23,12 +24,14 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-          </header>
-          <Register />
-        </div>
+        <ToastProvider placement="bottom-right" autoDismissTimeout="5000">
+          <div className="App">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+            </header>
+            <Register />
+          </div>
+        </ToastProvider>
       </Provider>
     </ThemeProvider>
   );

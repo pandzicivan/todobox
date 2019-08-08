@@ -2,9 +2,11 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import style from './register.module.scss';
-import {Formik, Form, Field} from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
 import withTranslations from '../../hoc/with-translations';
+import { registerUser } from '../../api/user';
+import { withToastManager } from 'react-toast-notifications';
 
 class Register extends React.Component {
   render() {
@@ -36,8 +38,13 @@ class Register extends React.Component {
                 .min(6, `${this.props.translate('form_field_min_length')} 6`)
                 .oneOf([yup.ref('password'), null], this.props.translate('form_field_password_mismatch')),
           })}
-          onSubmit={(values) => {
-            console.log(values);
+          onSubmit={async (values) => {
+            this.props.toastManager.add('hehe', { appearance: 'success'});
+            try {
+              registerUser(values);
+            } catch (e) {
+              console.log(e);
+            }
           }}>
           {({values, errors, touched, handleBlur, handleChange}) => (
             <Form>
@@ -132,4 +139,4 @@ class Register extends React.Component {
   }
 }
 
-export default withTranslations(Register);
+export default withToastManager(withTranslations(Register));
