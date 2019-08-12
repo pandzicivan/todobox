@@ -9,3 +9,11 @@ export function registerUser(data) {
     data: data,
   });
 }
+
+export function loginUser(data) {
+  return http({
+    url: `${baseUrl}/users/login`,
+    method: 'POST',
+    data: data,
+  });
+}

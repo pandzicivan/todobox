@@ -1,12 +1,13 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import style from './register.module.scss';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
+import { withToastManager } from 'react-toast-notifications';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import style from './register.module.scss';
 import withTranslations from '../../hoc/with-translations';
 import { registerUser } from '../../api/user';
-import { withToastManager } from 'react-toast-notifications';
 
 class Register extends React.Component {
   render() {
@@ -53,7 +54,7 @@ class Register extends React.Component {
                 id="firstName"
                 name="firstName"
                 margin="dense"
-                label={this.props.translate('register_first_name')}
+                label={this.props.translate('form_field_first_name')}
                 value={values.firstName}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -68,7 +69,7 @@ class Register extends React.Component {
                 id="lastName"
                 name="lastName"
                 margin="dense"
-                label={this.props.translate('register_last_name')}
+                label={this.props.translate('form_field_last_name')}
                 value={values.lastName}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -83,7 +84,7 @@ class Register extends React.Component {
                 id="email"
                 name="email"
                 margin="dense"
-                label={this.props.translate('register_email')}
+                label={this.props.translate('form_field_email')}
                 value={values.email}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -98,7 +99,7 @@ class Register extends React.Component {
                 id="password"
                 name="password"
                 margin="dense"
-                label={this.props.translate('register_password')}
+                label={this.props.translate('form_field_password')}
                 value={values.password}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -113,7 +114,7 @@ class Register extends React.Component {
                 id="repeatPassword"
                 name="repeatPassword"
                 margin="dense"
-                label={this.props.translate('register_repeat_password')}
+                label={this.props.translate('form_field_repeat_password')}
                 value={values.repeatPassword}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -128,7 +129,7 @@ class Register extends React.Component {
                 size="large"
                 type="submit"
                 fullWidth>
-                {this.props.translate('register_register')}
+                {this.props.translate('register_register_btn')}
               </Button>
             </Form>
           )}
