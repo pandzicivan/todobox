@@ -39,11 +39,10 @@ class Register extends React.Component {
                 .oneOf([yup.ref('password'), null], this.props.translate('form_field_password_mismatch')),
           })}
           onSubmit={async (values) => {
-            this.props.toastManager.add('hehe', { appearance: 'success'});
             try {
               registerUser(values);
             } catch (e) {
-              console.log(e);
+              this.props.toastManager.add(e.message, { appearance: 'error'});
             }
           }}>
           {({values, errors, touched, handleBlur, handleChange}) => (
