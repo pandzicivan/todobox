@@ -15,6 +15,8 @@ import {
   Route,
   Switch
 } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import './styles/animations.scss';
 
 const theme = createMuiTheme({
   palette: {
@@ -32,15 +34,26 @@ function App() {
       <Provider store={store}>
         <ToastProvider placement="bottom-right" autoDismissTimeout="5000">
           <Router>
-            <div className="App">
-              <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-              </header>
-              <Switch>
-                <Route path="/" exact={true} component={Login} />
-                <Route path="/register" component={Register} />
-              </Switch>
-            </div>
+            <Route render={({ location }) => (
+              <div className="App">
+                <header className="App-header">
+                  <img src={logo} className="App-logo" alt="logo" />
+                </header>
+                <TransitionGroup>
+                  <CSSTransition
+                    key={location.key}
+                    enter={true}
+                    exit={false}
+                    timeout={300}
+                    classNames='fade'>
+                    <Switch location={location}>
+                      <Route path="/" exact={true} component={Login} />
+                      <Route path="/register" component={Register} />
+                    </Switch>
+                  </CSSTransition>
+                </TransitionGroup>
+              </div>
+            )}/>
           </Router>
         </ToastProvider>
       </Provider>

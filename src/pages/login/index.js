@@ -4,8 +4,8 @@ import * as yup from 'yup';
 import { withToastManager } from 'react-toast-notifications';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import style from './login.module.scss';
 
+import style from './login.module.scss';
 import withTranslations from '../../hoc/with-translations';
 import { loginUser } from '../../api/user';
 
