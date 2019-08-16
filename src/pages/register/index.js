@@ -41,9 +41,9 @@ class Register extends React.Component {
           })}
           onSubmit={async (values) => {
             try {
-              registerUser(values);
+              await registerUser(values);
             } catch (e) {
-              this.props.toastManager.add(e.message, { appearance: 'error'});
+              this.props.toastManager.add(e.message, { appearance: 'error', autoDismiss: 'true'});
             }
           }}>
           {({values, errors, touched, handleBlur, handleChange}) => (

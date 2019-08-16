@@ -8,7 +8,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import red from '@material-ui/core/colors/red';
 import Register from './pages/register';
 import Login from './pages/login';
-import logo from './logo.svg';
+import logo from './assets/todoer.png';
 import { ToastProvider } from 'react-toast-notifications';
 import {
   BrowserRouter as Router,
