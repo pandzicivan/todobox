@@ -1,9 +1,9 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
-import { withToastManager } from 'react-toast-notifications';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { toast } from 'react-toastify';
 
 import style from './register.module.scss';
 import withTranslations from '../../hoc/with-translations';
@@ -43,7 +43,7 @@ class Register extends React.Component {
             try {
               await registerUser(values);
             } catch (e) {
-              this.props.toastManager.add(e.message, { appearance: 'error', autoDismiss: 'true'});
+              toast.error(e.message);
             }
           }}>
           {({values, errors, touched, handleBlur, handleChange}) => (
@@ -139,4 +139,4 @@ class Register extends React.Component {
   }
 }
 
-export default withToastManager(withTranslations(Register));
+export default withTranslations(Register);

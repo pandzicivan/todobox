@@ -1,9 +1,9 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
-import { withToastManager } from 'react-toast-notifications';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { toast } from 'react-toastify';
 
 import style from './login.module.scss';
 import withTranslations from '../../hoc/with-translations';
@@ -33,9 +33,9 @@ class Login extends React.Component {
             })}
             onSubmit={async (values) => {
               try {
-                loginUser(values);
+                await loginUser(values);
               } catch (e) {
-                this.props.toastManager.add(e.message, { appearance: 'error'});
+                toast.error(e.message);
               }
             }}>
               {({values, errors, touched, handleBlur, handleChange}) => (
@@ -95,4 +95,4 @@ class Login extends React.Component {
   }
 }
 
-export default withToastManager(withTranslations(Login));
+export default withTranslations(Login);

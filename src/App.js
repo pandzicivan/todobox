@@ -9,7 +9,7 @@ import red from '@material-ui/core/colors/red';
 import Register from './pages/register';
 import Login from './pages/login';
 import logo from './assets/todoer.png';
-import { ToastProvider } from 'react-toast-notifications';
+import { ToastContainer, toast } from 'react-toastify';
 import {
   BrowserRouter as Router,
   Route,
@@ -17,6 +17,7 @@ import {
 } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './styles/animations.scss';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const theme = createMuiTheme({
   palette: {
@@ -32,30 +33,29 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <ToastProvider placement="bottom-right" autoDismissTimeout="5000">
-          <Router>
-            <Route render={({ location }) => (
-              <div className="App">
-                <header className="App-header">
-                  <img src={logo} className="App-logo" alt="logo" />
-                </header>
-                <TransitionGroup>
-                  <CSSTransition
-                    key={location.key}
-                    enter={true}
-                    exit={false}
-                    timeout={300}
-                    classNames='fade'>
-                    <Switch location={location}>
-                      <Route path="/" exact={true} component={Login} />
-                      <Route path="/register" component={Register} />
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
-              </div>
-            )}/>
-          </Router>
-        </ToastProvider>
+        <Router>
+          <Route render={({ location }) => (
+            <div className="App">
+              <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+              </header>
+              <TransitionGroup>
+                <CSSTransition
+                  key={location.key}
+                  enter={true}
+                  exit={false}
+                  timeout={300}
+                  classNames='fade'>
+                  <Switch location={location}>
+                    <Route path="/" exact={true} component={Login} />
+                    <Route path="/register" component={Register} />
+                  </Switch>
+                </CSSTransition>
+              </TransitionGroup>
+              <ToastContainer position={toast.POSITION.BOTTOM_RIGHT}/>
+            </div>
+          )}/>
+        </Router>
       </Provider>
     </ThemeProvider>
   );
