@@ -9,7 +9,6 @@ import red from '@material-ui/core/colors/red';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import Home from './pages/home/Home';
-import logo from './assets/logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import {
   BrowserRouter as Router,
@@ -38,9 +37,6 @@ function App() {
         <Router>
           <Route render={({ location }) => (
             <div className="app">
-              <header className="header">
-                <img src={logo} className="app-logo" alt="logo" />
-              </header>
               <TransitionGroup>
                 <CSSTransition
                   key={location.key}
