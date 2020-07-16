@@ -2,27 +2,36 @@
 
 .login {
   font-size: 16px;
+  padding: 1em;
 
   .logo {
     display: flex;
     justify-content: center;
-    
-    img {
-      max-width: 90vw;
-    }
-
-    @media screen and (max-width: $breakpoint-sm) {
-      img {
-        max-width: 10em;
-      }
-    }
   }
 
   .form {
-
+    padding-top: 4em;
+    max-width: 29.5em;
+    margin: 0 auto;
   }
 
   .btn {
     margin-top: 1em;
+  }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+  .login {
+
+    .logo {
+      
+      img {
+        max-width: 10em;
+      }
+    }
+
+    .form{
+      max-width: 19.5em;
+    }
   }
 }
