@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { toast } from 'react-toastify';
 
 import style from './register.module.scss';
-import withTranslations from '../../hoc/with-translations';
+import WithTranslations from '../../hoc/with-translations';
 import { registerUser } from '../../api/user';
 
 class Register extends React.Component {
@@ -139,4 +139,4 @@ class Register extends React.Component {
   }
 }
 
-export default withTranslations(Register);
+export default WithTranslations(Register);

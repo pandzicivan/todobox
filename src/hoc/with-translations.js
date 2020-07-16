@@ -7,21 +7,18 @@ const mapStateToProps = (state) => (
   }
 );
 
-function withTranslations(WrappedComponent) {
-  return class Register extends React.Component {
-    translate = (key) => {
-      return this.props.translations[key] || key;
+const WithTranslations = (WrappedComponent) => {
+  return function WithTranslationsComponent(props) {
+    const {
+      translations,
+    } = props;
+  
+    const translate = (key) => {
+      return translations[key] || key;
     }
-
-    render() {
-      return (
-        <WrappedComponent translate={this.translate} {...this.props} />
-      );
-    }
-  };
+  
+    return <WrappedComponent translate={translate} {...props} />
+  }
 }
 
-export default (WrappedComponent) => connect(
-    mapStateToProps,
-    null
-)(withTranslations(WrappedComponent));
+export default (WrappedComponent) => connect(mapStateToProps)(WithTranslations(WrappedComponent));

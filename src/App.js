@@ -8,6 +8,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import red from '@material-ui/core/colors/red';
 import Register from './pages/register';
 import Login from './pages/login';
+import Home from './pages/home';
 import logo from './assets/todoer.png';
 import { ToastContainer, toast } from 'react-toastify';
 import {
@@ -18,6 +19,7 @@ import {
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './styles/animations.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
+import AuthRoute from './hoc/auth-route';
 
 const theme = createMuiTheme({
   palette: {
@@ -47,7 +49,10 @@ function App() {
                   timeout={300}
                   classNames='fade'>
                   <Switch location={location}>
-                    <Route path="/" exact={true} component={Login} />
+                    <AuthRoute path="/" exact={true}>
+                      <Home />
+                    </AuthRoute>
+                    <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                   </Switch>
                 </CSSTransition>

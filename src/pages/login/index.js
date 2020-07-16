@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { toast } from 'react-toastify';
 
 import style from './login.module.scss';
-import withTranslations from '../../hoc/with-translations';
+import WithTranslations from '../../hoc/with-translations';
 import { loginUser } from '../../api/user';
 
 class Login extends React.Component {
@@ -95,4 +95,4 @@ class Login extends React.Component {
   }
 }
 
-export default withTranslations(Login);
+export default WithTranslations(Login);

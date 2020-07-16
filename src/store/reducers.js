@@ -15,6 +15,9 @@ const initialState = {
     login_register_btn: 'Register',
     register_register_btn: 'Register',
   },
+  user: {
+    authenticated: false,
+  }
 };
 
 export default function(state = initialState, action) {
