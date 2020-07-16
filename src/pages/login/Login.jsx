@@ -12,7 +12,7 @@ import { loginUser } from '../../api/user';
 
 class Login extends React.Component {
   
-  redirectToRegister = () => {
+  navigateToRegister = () => {
     const { history } = this.props;
     history.push('/register');
   };
@@ -92,7 +92,7 @@ class Login extends React.Component {
             size="large"
             type="submit"
             fullWidth
-            onClick={this.redirectToRegister}>
+            onClick={this.navigateToRegister}>
             {this.props.translate('login_register_btn')}
           </Button>
         </div>
