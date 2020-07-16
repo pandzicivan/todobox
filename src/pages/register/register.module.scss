@@ -1,10 +1,39 @@
+@import "../../styles/breakpoints.scss";
+
 .register {
   font-size: 16px;
   padding: 1em;
   height: 100vh;
   padding-top: 15vh;
 
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form {
+    padding-top: 4em;
+    max-width: 29.5em;
+    margin: 0 auto;
+  }
+
   .btn {
     margin-top: 2em;
+  }
+}
+
+@media screen and (max-width: $breakpoint-sm) {
+  .register {
+
+    .logo {
+      
+      img {
+        max-width: 10em;
+      }
+    }
+
+    .form {
+      max-width: 19.5em;
+    }
   }
 }
