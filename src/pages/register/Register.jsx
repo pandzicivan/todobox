@@ -124,7 +124,7 @@ class Register extends React.Component {
                 fullWidth
               />
               <Button color="primary"
-                className={style.registerBtn}
+                className={style.btn}
                 variant="contained"
                 size="large"
                 type="submit"
