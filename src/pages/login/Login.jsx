@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { toast } from 'react-toastify';
 
 import style from './login.module.scss';
-import WithTranslations from '../../hoc/with-translations';
+import WithTranslations from '../../hoc/WithTranslations';
 import { loginUser } from '../../api/user';
 
 class Login extends React.Component {

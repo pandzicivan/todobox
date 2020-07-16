@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { toast } from 'react-toastify';
 
 import style from './register.module.scss';
-import WithTranslations from '../../hoc/with-translations';
+import WithTranslations from '../../hoc/WithTranslations';
 import { registerUser } from '../../api/user';
 
 class Register extends React.Component {

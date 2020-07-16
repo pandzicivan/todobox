@@ -6,9 +6,9 @@ import { ThemeProvider } from '@material-ui/styles';
 import indigo from '@material-ui/core/colors/indigo';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import red from '@material-ui/core/colors/red';
-import Register from './pages/register';
-import Login from './pages/login';
-import Home from './pages/home';
+import Register from './pages/register/Register';
+import Login from './pages/login/Login';
+import Home from './pages/home/Home';
 import logo from './assets/logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import {
@@ -19,7 +19,7 @@ import {
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import './styles/animations.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
-import AuthRoute from './hoc/auth-route';
+import AuthRoute from './hoc/AuthRoute';
 
 const theme = createMuiTheme({
   palette: {
