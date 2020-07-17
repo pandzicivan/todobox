@@ -10,7 +10,7 @@ module.exports = {
   ],
   'plugins': [
     'react',
-    'babel'
+    'babel',
   ],
   'parserOptions': {
     'ecmaVersion': 2018,
@@ -29,5 +29,7 @@ module.exports = {
     'no-invalid-this': 'off',
     'react/prop-types': 'off',
     'max-len': 'off',
+    'new-cap': 'off',
+    'babel/semi': 'on'
   }
 };

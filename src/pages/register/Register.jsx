@@ -1,14 +1,14 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import {Formik, Form, Field} from 'formik';
 import * as yup from 'yup';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 
 import style from './register.module.scss';
 import WithTranslations from '../../hoc/WithTranslations';
 import Logo from '../../components/Logo';
-import { registerUser } from '../../api/user';
+import {registerUser} from '../../api/user';
 
 class Register extends React.Component {
   render() {

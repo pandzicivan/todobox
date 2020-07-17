@@ -1,4 +1,16 @@
-import {GET_TRANSLATIONS} from './actions';
+import {
+  GET_TRANSLATIONS,
+  CHECK_AUTH,
+  AUTH_SUCCESS,
+  AUTH_ERROR,
+} from './actions';
+
+const guestProfile = {
+  id: null,
+  firstName: '',
+  lastName: '',
+  email: '',
+};
 
 const initialState = {
   translations: {
@@ -17,13 +29,40 @@ const initialState = {
   },
   user: {
     authenticated: false,
-  }
+    authInProgress: false,
+    profile: guestProfile,
+  },
 };
 
 export default function(state = initialState, action) {
-  switch (action) {
+  switch (action.type) {
     case GET_TRANSLATIONS:
-      return state;
+      return state.translations;
+    case CHECK_AUTH:
+      return {
+        ...state,
+        user: {
+          authInProgress: true,
+        },
+      };
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        user: {
+          authenticated: true,
+          authInProgress: false,
+          profile: action.profile,
+        },
+      };
+    case AUTH_ERROR:
+      return {
+        ...state,
+        user: {
+          authenticated: false,
+          authInProgress: false,
+          profile: guestProfile,
+        },
+      }
     default:
       return state;
   }

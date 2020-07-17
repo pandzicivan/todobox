@@ -12,13 +12,13 @@ const WithTranslations = (WrappedComponent) => {
     const {
       translations,
     } = props;
-  
+
     const translate = (key) => {
       return translations[key] || key;
-    }
-  
-    return <WrappedComponent translate={translate} {...props} />
-  }
-}
+    };
+
+    return <WrappedComponent translate={translate} {...props} />;
+  };
+};
 
 export default (WrappedComponent) => connect(mapStateToProps)(WithTranslations(WrappedComponent));
