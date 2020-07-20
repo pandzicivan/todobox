@@ -1,7 +1,6 @@
 import React from 'react';
 import {createMuiTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/styles';
-import indigo from '@material-ui/core/colors/indigo';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import red from '@material-ui/core/colors/red';
 import Register from '../pages/register/Register';
@@ -21,7 +20,9 @@ import AuthRoute from '../hoc/AuthRoute';
 
 const theme = createMuiTheme({
   palette: {
-    primary: indigo,
+    primary: {
+      main: '#425BD9',
+    },
     secondary: deepOrange,
     error: red,
     contrastThreshold: 3,
