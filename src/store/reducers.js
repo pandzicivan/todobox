@@ -42,6 +42,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         user: {
+          ...state.user,
           authInProgress: true,
         },
       };

@@ -7,6 +7,7 @@ import red from '@material-ui/core/colors/red';
 import Register from '../pages/register/Register';
 import Login from '../pages/login/Login';
 import Home from '../pages/home/Home';
+import ScreenLoader from './ScreenLoader/ScreenLoader';
 import {ToastContainer, toast} from 'react-toastify';
 import {
   BrowserRouter as Router,
@@ -29,7 +30,19 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props.checkAuth();
+  }
+
   render() {
+    const {
+      user,
+    } = this.props;
+    if (user.authInProgress) {
+      return <ScreenLoader />
+    }
+
     return (
       <ThemeProvider theme={theme}>
         <Router>
