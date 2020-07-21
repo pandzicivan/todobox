@@ -7,6 +7,12 @@ const Logo = () => {
   const history = useHistory();
 
   const navigateToHome = () => {
+    const {
+      pathname: path,
+    } = history.location;
+
+    if (path === '/') return;
+
     history.push('/');
   };
 
