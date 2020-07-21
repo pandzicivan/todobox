@@ -31,3 +31,12 @@ export async function loginCheck() {
     return false;
   }
 }
+
+
+export async function logoutUser() {
+  return http({
+    url: `${baseUrl}/users/logout`,
+    method: 'GET',
+    withCredentials: true,
+  });
+}

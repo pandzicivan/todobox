@@ -3,6 +3,7 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
 import style from './style.module.scss';
 import Logo from '../Logo';
+import Sidebar from '../../containers/Sidebar/Sidebar';
 
 const Header = () => {
   const [drawer, toggleDrawer] = useState(false);
@@ -25,7 +26,7 @@ const Header = () => {
           onClose={() => toggleDrawer(false)}
           onOpen={() => toggleDrawer(true)}
         >
-          <h1>Hehe</h1>
+          <Sidebar />
         </SwipeableDrawer>
       </React.Fragment>
     </div>

@@ -1,10 +1,13 @@
-import {loginCheck, loginUser} from '../api/user';
+import {loginCheck, loginUser, logoutUser} from '../api/user';
 
 export const GET_TRANSLATIONS = 'GET_TRANSLATIONS';
 export const CHECK_AUTH = 'CHECK_AUTH';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const LOGOUT = 'LOGOUT';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 
 export function getTranslations() {
   return {
@@ -20,9 +23,14 @@ export function checkAuth() {
 
     const user = await loginCheck();
     if (user) {
-      dispatch(authSuccess(user));
+      dispatch({
+        type: AUTH_SUCCESS,
+        profile: user,
+      });
     } else {
-      dispatch(authError())
+      dispatch({
+        type: AUTH_ERROR,
+      });
     }
   };
 }
@@ -35,23 +43,35 @@ export function authenticate(data) {
 
     try {
       const user = await loginUser(data);
-      dispatch(authSuccess(user));
+      dispatch({
+        type: AUTH_SUCCESS,
+        profile: user,
+      });
     } catch(e) {
-      dispatch(authError());
+      dispatch({
+        type: AUTH_ERROR,
+      });
       throw e;
     }
   }
 }
 
-function authSuccess(user) {
-  return {
-    type: AUTH_SUCCESS,
-    profile: user,
-  }
-}
+export function logout() {
+  return async (dispatch) => {
+    dispatch({
+      type: LOGOUT,
+    });
 
-function authError() {
-  return {
-    type: AUTH_ERROR,
+    try {
+      await logoutUser();
+      dispatch({
+        type: LOGOUT_SUCCESS,
+      });
+    } catch(e) {
+      dispatch({
+        type: LOGOUT_ERROR,
+      });
+      throw e;
+    }
   }
 }

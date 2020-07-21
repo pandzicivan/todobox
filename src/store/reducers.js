@@ -4,6 +4,9 @@ import {
   AUTH_SUCCESS,
   AUTH_ERROR,
   AUTHENTICATE,
+  LOGOUT,
+  LOGOUT_SUCCESS,
+  LOGOUT_ERROR,
 } from './actions';
 
 const guestProfile = {
@@ -27,6 +30,7 @@ const initialState = {
     login_login_btn: 'Login',
     login_register_btn: 'Register',
     register_register_btn: 'Register',
+    sidebar_logout_btn: 'Logout',
   },
   user: {
     authenticated: false,
@@ -42,6 +46,7 @@ export default function(state = initialState, action) {
       return state.translations;
     case CHECK_AUTH:
     case AUTHENTICATE:
+    case LOGOUT:
       return {
         ...state,
         user: {
@@ -60,6 +65,7 @@ export default function(state = initialState, action) {
         },
       };
     case AUTH_ERROR:
+    case LOGOUT_SUCCESS:
       return {
         ...state,
         user: {
@@ -69,6 +75,14 @@ export default function(state = initialState, action) {
           profile: guestProfile,
         },
       }
+    case LOGOUT_ERROR:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          authInProgress: false,
+        },
+      };
     default:
       return state;
   }

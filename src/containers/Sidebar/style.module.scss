@@ -1,0 +1,18 @@
+@import "../../styles/variables.scss";
+
+.sidebar {
+  font-size: 16px;
+
+  width: 16em;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .logout {
+    border-top: solid 1px $sidebar-color-secondary;
+    display: flex;
+    justify-content: center;
+    padding: 0.75em 0;
+  }
+}
