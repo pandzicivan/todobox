@@ -1,8 +1,9 @@
 @import '../../styles/variables.scss';
+@import "../../styles/breakpoints.scss";
 
 .header {
   font-size: 16px;
-  height: 3.75em;
+  height: 5em;
   padding: 0 1em;
   background-color: $bg-color-secondary;
   display: flex;
@@ -17,5 +18,27 @@
       max-width:100%;
       max-height:100%;
     }
+  }
+
+  .profile {
+    height: 2.25em;
+    width: 2.25em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: $header-profile-bg;
+    border: 1px solid rgba(151, 151, 151, 0.29);
+
+    .icon {
+      opacity: 0.3;
+    }
+  }
+}
+
+@media screen and (max-width: $breakpoint-md) {
+  .header {
+    height: 3.75em;
   }
 }

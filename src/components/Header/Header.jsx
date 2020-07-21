@@ -8,6 +8,11 @@ const Header = () => {
       <div className={style.logo}>
         <Logo />
       </div>
+      <div className={style.profile}>
+        <span className={`${style.icon} material-icons`}>
+          person
+        </span>
+      </div>
     </div>
   )
 }
