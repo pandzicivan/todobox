@@ -17,6 +17,7 @@ import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import '../styles/animations.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
 import AuthRoute from '../hoc/AuthRoute';
+import GuestRoute from '../hoc/GuestRoute';
 
 const theme = createMuiTheme({
   palette: {
@@ -60,8 +61,12 @@ class App extends React.Component {
                     <AuthRoute path="/" exact={true}>
                       <Home />
                     </AuthRoute>
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
+                    <GuestRoute>
+                      <Route path="/login" component={Login} />
+                    </GuestRoute>
+                    <GuestRoute>
+                      <Route path="/register" component={Register} />
+                    </GuestRoute>
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>
