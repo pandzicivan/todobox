@@ -1,21 +1,30 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
+import {connect} from 'react-redux';
 
 import style from './login.module.scss';
 import WithTranslations from '../../hoc/WithTranslations';
 import Logo from '../../components/Logo';
-import { loginUser } from '../../api/user';
+import {authenticate} from '../../store/actions';
 
 class Login extends React.Component {
-  
   navigateToRegister = () => {
     const { history } = this.props;
     history.push('/register');
   };
+
+  navigateToHome = () => {
+    const { history } = this.props;
+    history.push('/');
+  }
+
+  authenticate = async (data) => {
+    return await this.props.authenticate(data);
+  }
 
   render() {
     return (
@@ -26,8 +35,8 @@ class Login extends React.Component {
         <div className={style.form}>
           <Formik
             initialValues={{
-              email: '',
-              password: '',
+                email: '',
+                password: '',
               }}
               validationSchema={yup.object().shape({
                 email: yup.string()
@@ -38,13 +47,13 @@ class Login extends React.Component {
               })}
               onSubmit={async (values) => {
                 try {
-                  await loginUser(values);
+                  await this.authenticate(values);
                 } catch (e) {
                   toast.error(e.message);
                 }
               }}>
-                {({values, errors, touched, handleBlur, handleChange}) => (
-                <Form>
+                {({values, errors, touched, handleBlur, handleChange, handleSubmit}) => (
+                <form onSubmit={handleSubmit}>
                   <Field
                     component={TextField}
                     type="email"
@@ -83,7 +92,7 @@ class Login extends React.Component {
                     fullWidth>
                     {this.props.translate('login_login_btn')}
                   </Button>
-                </Form>
+                </form>
               )}
           </Formik>
           <Button color="secondary"
@@ -101,4 +110,14 @@ class Login extends React.Component {
   }
 }
 
-export default WithTranslations(Login);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    authenticate(data) {
+      return dispatch(authenticate(data));
+    },
+  }
+}
+
+const LoginContainer = connect(null, mapDispatchToProps)(Login);
+
+export default WithTranslations(LoginContainer);

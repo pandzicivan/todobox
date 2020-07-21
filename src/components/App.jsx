@@ -40,7 +40,7 @@ class App extends React.Component {
     const {
       user,
     } = this.props;
-    if (user.authInProgress) {
+    if (!user.credentialsChecked) {
       return <ScreenLoader />
     }
 

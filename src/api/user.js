@@ -10,11 +10,12 @@ export async function registerUser(data) {
   });
 }
 
-export async function loginUser(data) {
+export function loginUser(data) {
   return http({
     url: `${baseUrl}/users/login`,
     method: 'POST',
     data: data,
+    withCredentials: true,
   });
 }
 
@@ -23,6 +24,7 @@ export async function loginCheck() {
     const response = await http({
       url: `${baseUrl}/users/login`,
       method: 'GET',
+      withCredentials: true,
     });
     return response;
   } catch (err) {

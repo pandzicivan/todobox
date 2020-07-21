@@ -3,6 +3,7 @@ import {
   CHECK_AUTH,
   AUTH_SUCCESS,
   AUTH_ERROR,
+  AUTHENTICATE,
 } from './actions';
 
 const guestProfile = {
@@ -30,6 +31,7 @@ const initialState = {
   user: {
     authenticated: false,
     authInProgress: false,
+    credentialsChecked: false,
     profile: guestProfile,
   },
 };
@@ -39,6 +41,7 @@ export default function(state = initialState, action) {
     case GET_TRANSLATIONS:
       return state.translations;
     case CHECK_AUTH:
+    case AUTHENTICATE:
       return {
         ...state,
         user: {
@@ -50,6 +53,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         user: {
+          credentialsChecked: true,
           authenticated: true,
           authInProgress: false,
           profile: action.profile,
@@ -59,6 +63,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         user: {
+          credentialsChecked: true,
           authenticated: false,
           authInProgress: false,
           profile: guestProfile,
