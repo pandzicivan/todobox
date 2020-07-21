@@ -3,10 +3,10 @@ import {createMuiTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/styles';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import red from '@material-ui/core/colors/red';
-import Register from '../pages/register/Register';
-import Login from '../pages/login/Login';
-import Home from '../pages/home/Home';
-import ScreenLoader from './ScreenLoader/ScreenLoader';
+import Register from '../../pages/register/Register';
+import Login from '../../pages/login/Login';
+import Home from '../../pages/home/Home';
+import ScreenLoader from '../ScreenLoader/ScreenLoader';
 import {ToastContainer, toast} from 'react-toastify';
 import {
   BrowserRouter as Router,
@@ -14,10 +14,11 @@ import {
   Switch,
 } from 'react-router-dom';
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
-import '../styles/animations.scss';
+import '../../styles/animations.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
-import AuthRoute from '../hoc/AuthRoute';
-import GuestRoute from '../hoc/GuestRoute';
+import AuthRoute from '../../hoc/AuthRoute';
+import GuestRoute from '../../hoc/GuestRoute';
+import style from './style.module.scss';
 
 const theme = createMuiTheme({
   palette: {
@@ -49,7 +50,7 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <Router>
           <Route render={({location}) => (
-            <div className="app">
+            <div className={style.app}>
               <TransitionGroup>
                 <CSSTransition
                   key={location.key}
