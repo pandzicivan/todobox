@@ -1,0 +1,19 @@
+@import "../../styles/variables.scss";
+@import '../../styles/breakpoints.scss';
+
+.tasks {
+  font-size: 16px;
+  width: 65em;
+  margin: 0.5em auto;
+
+  .datepicker {
+    width: 30em;
+    margin: 0.5em auto;
+  }
+}
+
+@media screen and (max-width: $breakpoint-md) {
+  .tasks {
+    width: 100%;
+  }
+}

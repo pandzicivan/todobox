@@ -1,12 +1,13 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
+import Tasks from '../../containers/Tasks/Tasks';
 
 class Home extends React.Component {
   render() {
     return (
       <React.Fragment>
         <Header />
-        <h1>hehe</h1>
+        <Tasks />
       </React.Fragment>
     );
   }
