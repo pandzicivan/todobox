@@ -59,15 +59,9 @@ class App extends React.Component {
                   timeout={300}
                   classNames='fade'>
                   <Switch location={location}>
-                    <AuthRoute path="/" exact={true}>
-                      <Home />
-                    </AuthRoute>
-                    <GuestRoute>
-                      <Route path="/login" component={Login} />
-                    </GuestRoute>
-                    <GuestRoute>
-                      <Route path="/register" component={Register} />
-                    </GuestRoute>
+                    <AuthRoute path="/" exact={true} component={Home} />
+                    <GuestRoute path="/register" exact={true} component={Register} />
+                    <GuestRoute path="/login" exact={true} component={Login} />
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>

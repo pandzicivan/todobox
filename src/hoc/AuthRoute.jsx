@@ -13,7 +13,7 @@ const AuthRoute = (props) => {
   if (!isAuthenticated) {
     return <Redirect to="/login" />;
   } else {
-    return <Route {...props} />;
+    return <Route component={props.component} {...props} />;
   }
 };
 

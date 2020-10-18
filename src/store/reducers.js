@@ -16,7 +16,7 @@ const guestProfile = {
   email: '',
 };
 
-const initialState = {
+const defaultState = {
   translations: {
     form_field_first_name: 'First name',
     form_field_last_name: 'Last name',
@@ -40,7 +40,7 @@ const initialState = {
   },
 };
 
-export default function(state = initialState, action) {
+export default function(state = defaultState, action) {
   switch (action.type) {
     case GET_TRANSLATIONS:
       return state.translations;

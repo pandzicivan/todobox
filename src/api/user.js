@@ -7,6 +7,7 @@ export async function registerUser(data) {
     url: `${baseUrl}/users/register`,
     method: 'POST',
     data: data,
+    withCredentials: true,
   });
 }
 

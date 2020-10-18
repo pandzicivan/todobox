@@ -9,9 +9,11 @@ const mapStateToProps = (state) => (
 );
 
 const GuestRoute = (props) => {
-  const {isAuthenticated} = props;
+  const {
+    isAuthenticated,
+  } = props;
   if (!isAuthenticated) {
-    return <Route {...props} />;
+    return <Route component={props.component} {...props} />;
   } else {
     return <Redirect to="/" />;
   }
