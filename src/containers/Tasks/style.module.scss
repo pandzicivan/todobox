@@ -10,6 +10,36 @@
     width: 30em;
     margin: 0.5em auto;
   }
+
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .open_tasks {
+      flex: 0.49;
+      padding: 1em 2em;
+      background-color: $tasks-bg-color;
+      border-radius: 0.5em;
+
+      .add_new_task {
+        text-align: right;
+        
+        .separator {
+          opacity: 0.3;
+        }
+      }
+
+    }
+
+    .done_tasks {
+      flex: 0.49;
+      padding: 2em;
+      background-color: $tasks-bg-color;
+      border-radius: 0.5em;
+    }
+  }
 }
 
 @media screen and (max-width: $breakpoint-md) {
