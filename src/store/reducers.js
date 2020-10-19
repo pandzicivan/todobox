@@ -31,6 +31,8 @@ const defaultState = {
     login_register_btn: 'Register',
     register_register_btn: 'Register',
     sidebar_logout_btn: 'Logout',
+    tasks_new: 'New task',
+    tasks_description: 'Description',
     tasks_save_btn: 'Save',
     tasks_discard_btn: 'Discard',
   },

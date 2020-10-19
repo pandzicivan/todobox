@@ -6,6 +6,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/TextField';
 import WithTranslations from '../../hoc/WithTranslations';
 
 class Tasks extends React.Component {
@@ -50,8 +53,17 @@ class Tasks extends React.Component {
             <Task />
           </div>
         </div>
-        <Dialog open={this.state.dialogActive} onClose={this.closeDialog}>
-          <h1>Heheh</h1>
+        <Dialog open={this.state.dialogActive}
+          onClose={this.closeDialog}
+          fullWidth>
+          <DialogTitle>{this.props.translate('tasks_new')}</DialogTitle>
+          <DialogContent>
+            <TextField
+              fullWidth
+              label={this.props.translate('tasks_description')}
+              multiline
+            />
+          </DialogContent>
           <DialogActions>
             <Button onClick={this.closeDialog} color="primary">
               {this.props.translate('tasks_save_btn')}
