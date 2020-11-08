@@ -7,6 +7,9 @@ import {
   LOGOUT,
   LOGOUT_SUCCESS,
   LOGOUT_ERROR,
+  GET_TASKS,
+  GET_TASKS_SUCCESS,
+  GET_TASKS_ERROR,
 } from './actions';
 
 const guestProfile = {
@@ -42,6 +45,10 @@ const defaultState = {
     credentialsChecked: false,
     profile: guestProfile,
   },
+  tasks: {
+    getTasksReqInProgress: false,
+    data: {},
+  }
 };
 
 export default function(state = defaultState, action) {
@@ -85,6 +92,31 @@ export default function(state = defaultState, action) {
         user: {
           ...state.user,
           authInProgress: false,
+        },
+      };
+    case GET_TASKS:
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          getTasksReqInProgress: true,
+        },
+      };
+    case GET_TASKS_SUCCESS:
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          getTasksReqInProgress: false,
+          data: action.tasks,
+        },
+      };
+    case GET_TASKS_ERROR:
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          getTasksReqInProgress: false,
         },
       };
     default:

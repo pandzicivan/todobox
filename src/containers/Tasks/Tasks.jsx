@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import DatePicker from 'react-horizontal-datepicker';
 import style from './style.module.scss';
 import Task from '../../components/Task/Task';
@@ -11,16 +12,25 @@ import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import WithTranslations from '../../hoc/WithTranslations';
 
+import {getTasks} from '../../store/actions';
+
 class Tasks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       dialogActive: false,
+      selectedDay: null,
     }
   }
 
+  componentDidMount() {
+    this.props.getTasks();
+  }
+
   selectDay = (val) => {
-    console.log(val)
+    this.setState({
+      selectedDay: val,
+    })
   }
 
   openDialog = () => {
@@ -66,10 +76,12 @@ class Tasks extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.closeDialog} color="primary">
-              {this.props.translate('tasks_save_btn')}
-            </Button>
-            <Button onClick={this.closeDialog} color="primary">
               {this.props.translate('tasks_discard_btn')}
+            </Button>
+            <Button onClick={this.closeDialog}
+              color="primary"
+              variant="contained">
+              {this.props.translate('tasks_save_btn')}
             </Button>
           </DialogActions>
         </Dialog>
@@ -78,4 +90,12 @@ class Tasks extends React.Component {
   }
 }
 
-export default WithTranslations(Tasks);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getTasks() {
+      dispatch(getTasks())
+    },
+  }
+}
+
+export default connect(null, mapDispatchToProps)(WithTranslations(Tasks));
