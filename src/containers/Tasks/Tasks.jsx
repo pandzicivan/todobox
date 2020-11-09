@@ -12,7 +12,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
 import WithTranslations from '../../hoc/WithTranslations';
 
-import {getTasks} from '../../store/actions';
+import {
+  getTasks,
+  createTask,
+} from '../../store/actions';
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -20,6 +23,7 @@ class Tasks extends React.Component {
     this.state = {
       dialogActive: false,
       selectedDay: null,
+      newTaskContent: '',
     }
   }
 
@@ -38,10 +42,30 @@ class Tasks extends React.Component {
   }
 
   closeDialog = () => {
-    this.setState({dialogActive: false});
+    this.setState({
+      dialogActive: false,
+      newTaskContent: '',
+    });
+  }
+
+  saveTask = () => {
+    this.props.createTask({
+      description: this.state.newTaskContent,
+      date: "2020-11-06",
+      alarm: "2020-11-06",
+    });
   }
 
   render() {
+    let Tasks = null;
+
+    if (Object.keys(this.props.tasks).length) {
+      Tasks = Object.keys(this.props.tasks).map((el) => {
+        const task = this.props.tasks[el];
+        return <Task key={task.id} description={task.description}/>
+      })
+    }
+
     return (
       <div className={style.tasks}>
         <div className={style.datepicker}>
@@ -57,6 +81,7 @@ class Tasks extends React.Component {
                 <span className="material-icons">add_box</span>
               </IconButton>
               <hr className={style.separator}/>
+              {Tasks}
             </div>
           </div>
           <div className={style.done_tasks}>
@@ -70,6 +95,12 @@ class Tasks extends React.Component {
           <DialogContent>
             <TextField
               fullWidth
+              value={this.state.content}
+              onChange={(e) => {
+                this.setState({
+                  newTaskContent: e.target.value,
+                })
+              }}
               label={this.props.translate('tasks_description')}
               multiline
             />
@@ -78,7 +109,7 @@ class Tasks extends React.Component {
             <Button onClick={this.closeDialog} color="primary">
               {this.props.translate('tasks_discard_btn')}
             </Button>
-            <Button onClick={this.closeDialog}
+            <Button onClick={this.saveTask}
               color="primary"
               variant="contained">
               {this.props.translate('tasks_save_btn')}
@@ -90,12 +121,19 @@ class Tasks extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  tasks: state.tasks.data,
+})
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getTasks() {
-      dispatch(getTasks())
+      dispatch(getTasks());
     },
+    createTask(data) {
+      dispatch(createTask(data));
+    }
   }
 }
 
-export default connect(null, mapDispatchToProps)(WithTranslations(Tasks));
+export default connect(mapStateToProps, mapDispatchToProps)(WithTranslations(Tasks));

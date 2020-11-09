@@ -10,6 +10,9 @@ import {
   GET_TASKS,
   GET_TASKS_SUCCESS,
   GET_TASKS_ERROR,
+  CREATE_TASK,
+  CREATE_TASK_ERROR,
+  CREATE_TASK_SUCCESS,
 } from './actions';
 
 const guestProfile = {
@@ -119,6 +122,14 @@ export default function(state = defaultState, action) {
           getTasksReqInProgress: false,
         },
       };
+    case CREATE_TASK_SUCCESS:
+        return {
+          ...state,
+          tasks: {
+            ...state.tasks,
+            data: [...state.tasks.data, action.data],
+          }
+        };
     default:
       return state;
   }

@@ -1,5 +1,15 @@
+@import "../../styles/variables.scss";
+
 .task {
   font-size: 16px;
-  border: solid 1px;
   border-radius: 0.5em;
+  background: $task-bg-color;
+  display: flex;
+  margin-top: 0.5em;
+
+  .content {
+    padding: 0.75em 0;
+    margin: 0;
+    text-align: left;
+  }
 }

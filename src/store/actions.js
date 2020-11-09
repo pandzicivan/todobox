@@ -1,5 +1,8 @@
 import {loginCheck, loginUser, logoutUser} from '../api/user';
-import {tasks} from '../api/tasks';
+import {
+  tasks,
+  create,
+} from '../api/tasks';
 
 export const GET_TRANSLATIONS = 'GET_TRANSLATIONS';
 export const CHECK_AUTH = 'CHECK_AUTH';
@@ -12,6 +15,9 @@ export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 export const GET_TASKS = 'GET_TASKS';
 export const GET_TASKS_SUCCESS = 'GET_TASKS_SUCCESS';
 export const GET_TASKS_ERROR = 'GET_TASKS_ERROR';
+export const CREATE_TASK = 'CREATE_TASK';
+export const CREATE_TASK_ERROR = 'CREATE_TASK_ERROR';
+export const CREATE_TASK_SUCCESS = 'CREATE_TASK_SUCCESS';
 
 export function getTranslations() {
   return {
@@ -95,6 +101,27 @@ export function getTasks() {
     } catch(e) {
       dispatch({
         type: GET_TASKS_ERROR,
+      });
+    }
+  }
+}
+
+export function createTask(data) {
+  return async (dispatch) => {
+    dispatch({
+      type: CREATE_TASK,
+      data,
+    })
+
+    try {
+      const task = await create(data);
+      dispatch({
+        type: CREATE_TASK_SUCCESS,
+        data: task,
+      });
+    } catch (e) {
+      dispatch({
+        type: CREATE_TASK_ERROR,
       });
     }
   }

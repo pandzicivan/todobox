@@ -8,7 +8,9 @@ const Task = (props) => {
       <Checkbox
         checked={props.done}
         color="primary"/>
-      {props.description}
+      <p className={style.content}>
+        {props.description}
+      </p>
     </div>
   )
 }
