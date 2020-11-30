@@ -2,6 +2,7 @@ import {loginCheck, loginUser, logoutUser} from '../api/user';
 import {
   tasks,
   create,
+  edit,
 } from '../api/tasks';
 
 export const GET_TRANSLATIONS = 'GET_TRANSLATIONS';
@@ -18,6 +19,9 @@ export const GET_TASKS_ERROR = 'GET_TASKS_ERROR';
 export const CREATE_TASK = 'CREATE_TASK';
 export const CREATE_TASK_ERROR = 'CREATE_TASK_ERROR';
 export const CREATE_TASK_SUCCESS = 'CREATE_TASK_SUCCESS';
+export const EDIT_TASK = 'EDIT_TASK';
+export const EDIT_TASK_SUCCESS = 'EDIT_TASK_SUCCESS';
+export const EDIT_TASK_ERROR = 'EDIT_TASK_ERROR';
 
 export function getTranslations() {
   return {

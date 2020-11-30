@@ -57,12 +57,17 @@ class Tasks extends React.Component {
   }
 
   render() {
-    let Tasks = null;
+    const OpenTasks = [];
+    const DoneTasks = [];
 
     if (Object.keys(this.props.tasks).length) {
-      Tasks = Object.keys(this.props.tasks).map((el) => {
+      Object.keys(this.props.tasks).map((el) => {
         const task = this.props.tasks[el];
-        return <Task key={task.id} description={task.description}/>
+        if (!task.archived) {
+          OpenTasks.push(<Task key={task.id} {...task}/>)
+        } else {
+          DoneTasks.push(<Task key={task.id} {...task}/>)
+        }
       })
     }
 
@@ -81,11 +86,11 @@ class Tasks extends React.Component {
                 <span className="material-icons">add_box</span>
               </IconButton>
               <hr className={style.separator}/>
-              {Tasks}
+              {OpenTasks}
             </div>
           </div>
           <div className={style.done_tasks}>
-            <Task />
+            {DoneTasks}
           </div>
         </div>
         <Dialog open={this.state.dialogActive}

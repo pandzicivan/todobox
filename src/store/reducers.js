@@ -10,9 +10,8 @@ import {
   GET_TASKS,
   GET_TASKS_SUCCESS,
   GET_TASKS_ERROR,
-  CREATE_TASK,
-  CREATE_TASK_ERROR,
   CREATE_TASK_SUCCESS,
+  EDIT_TASK_SUCCESS,
 } from './actions';
 
 const guestProfile = {
@@ -123,13 +122,17 @@ export default function(state = defaultState, action) {
         },
       };
     case CREATE_TASK_SUCCESS:
-        return {
-          ...state,
-          tasks: {
-            ...state.tasks,
-            data: [...state.tasks.data, action.data],
-          }
-        };
+    case EDIT_TASK_SUCCESS:
+      const tasks = state.tasks.data.map((task) => {
+        return task.id !== action.data.id ? task : action.data;
+      })
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          data: tasks,
+        }
+      };
     default:
       return state;
   }

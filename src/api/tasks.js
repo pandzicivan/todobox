@@ -22,3 +22,15 @@ export function create(data) {
     return response.data;
   });
 }
+
+export function edit(data) {
+  return http({
+    url: `${baseUrl}/tasks/${data.id}`,
+    method: 'PUT',
+    withCredentials: true,
+    data,
+  }).then((response) => {
+    return response.data;
+  });
+}
+
