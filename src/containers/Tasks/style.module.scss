@@ -22,6 +22,7 @@
       padding: 1em 2em;
       background-color: $tasks-bg-color;
       border-radius: 0.5em;
+      align-self: flex-start;
 
       .add_new_task {
         text-align: right;
@@ -38,6 +39,7 @@
       padding: 2em;
       background-color: $tasks-bg-color;
       border-radius: 0.5em;
+      align-self: flex-start;
     }
   }
 }
