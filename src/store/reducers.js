@@ -40,6 +40,8 @@ const defaultState = {
     tasks_description: 'Description',
     tasks_save_btn: 'Save',
     tasks_discard_btn: 'Discard',
+    tasks_todo: 'ToDo',
+    tasks_done: 'Done',
   },
   user: {
     authenticated: false,

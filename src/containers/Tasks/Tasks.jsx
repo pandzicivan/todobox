@@ -5,7 +5,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import style from './style.module.scss';
 import Task from '../../components/Task/Task';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import Fab from '@material-ui/core/Fab';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -122,15 +122,9 @@ class Tasks extends React.Component {
             {(provided, snapshot) => (
               <div className={style.open_tasks}
                 ref={provided.innerRef}>
-                <div className={style.add_new_task}>
-                  <IconButton
-                    onClick={this.openDialog}>
-                    <span className="material-icons">add_box</span>
-                  </IconButton>
-                  <hr className={style.separator}/>
-                  {OpenTasks}
-                  {provided.placeholder}
-                </div>
+                <p className={style.title}>{this.props.translate('tasks_todo')}</p>
+                {OpenTasks}
+                {provided.placeholder}
               </div>
             )}
             </Droppable>
@@ -138,6 +132,7 @@ class Tasks extends React.Component {
             {(provided, snapshot) => (
               <div className={style.done_tasks}
                 ref={provided.innerRef}>
+                <p className={style.title}>{this.props.translate('tasks_done')}</p>
                 {DoneTasks}
                 {provided.placeholder}
               </div>
@@ -173,6 +168,11 @@ class Tasks extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
+        <Fab color="primary" aria-label="add"
+          className={style.fab}
+          onClick={this.openDialog}>
+          <span className="material-icons">add</span>
+        </Fab>
       </div>
     );
   }

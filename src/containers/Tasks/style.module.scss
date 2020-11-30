@@ -19,19 +19,10 @@
 
     .open_tasks {
       flex: 0.49;
-      padding: 1em 2em;
+      padding: 2em;
       background-color: $tasks-bg-color;
       border-radius: 0.5em;
       align-self: flex-start;
-
-      .add_new_task {
-        text-align: right;
-        
-        .separator {
-          opacity: 0.3;
-        }
-      }
-
     }
 
     .done_tasks {
@@ -41,6 +32,21 @@
       border-radius: 0.5em;
       align-self: flex-start;
     }
+
+    .title {
+      margin: 0 0 1em 0;
+      padding-bottom: 0.5em;
+      font-size: 1.25em;
+      border-bottom: solid 1px;
+      border-color: $tasks-separator-color;
+      color: $tasks-color-primary;
+    }
+  }
+
+  .fab {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
   }
 }
 
