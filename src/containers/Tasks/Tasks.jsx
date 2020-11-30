@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import DatePicker from 'react-horizontal-datepicker';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import style from './style.module.scss';
 import Task from '../../components/Task/Task';
 import Button from '@material-ui/core/Button';
@@ -15,6 +16,7 @@ import WithTranslations from '../../hoc/WithTranslations';
 import {
   getTasks,
   createTask,
+  toggleTaskStatus,
 } from '../../store/actions';
 
 class Tasks extends React.Component {
@@ -34,6 +36,7 @@ class Tasks extends React.Component {
   selectDay = (val) => {
     this.setState({
       selectedDay: val,
+      draggedTask: null
     })
   }
 
@@ -55,18 +58,52 @@ class Tasks extends React.Component {
       alarm: "2020-11-06",
     });
   }
+  
+  onDragStart = (data) => {
+    if (window.navigator.vibrate) {
+      window.navigator.vibrate(100);
+    }
+    this.setState({
+      draggedTask: data.draggableId
+    })
+  }
+
+  onDragEnd = (result) => {
+    const {source, destination} = result;
+    if (source.droppableId === destination.droppableId) return
+
+    this.props.toggleTaskStatus(this.state.draggedTask)
+    this.setState({
+      draggedTask: null
+    })
+  }
 
   render() {
     const OpenTasks = [];
     const DoneTasks = [];
 
     if (Object.keys(this.props.tasks).length) {
-      Object.keys(this.props.tasks).map((el) => {
+      Object.keys(this.props.tasks).map((el, idx) => {
         const task = this.props.tasks[el];
+        const DraggableTask = 
+        <Draggable key={task.id}
+          index={idx}
+          draggableId={task.id}>
+          {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            key={task.id}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}>
+            <Task {...task}/>
+          </div>
+          )}
+        </Draggable>
+
         if (!task.archived) {
-          OpenTasks.push(<Task key={task.id} {...task}/>)
+          OpenTasks.push(DraggableTask)
         } else {
-          DoneTasks.push(<Task key={task.id} {...task}/>)
+          DoneTasks.push(DraggableTask)
         }
       })
     }
@@ -79,19 +116,34 @@ class Tasks extends React.Component {
             getSelectedDay={this.selectDay}/>
         </div>
         <div className={style.container}>
-          <div className={style.open_tasks}>
-            <div className={style.add_new_task}>
-              <IconButton
-                onClick={this.openDialog}>
-                <span className="material-icons">add_box</span>
-              </IconButton>
-              <hr className={style.separator}/>
-              {OpenTasks}
-            </div>
-          </div>
-          <div className={style.done_tasks}>
-            {DoneTasks}
-          </div>
+          <DragDropContext onDragEnd={this.onDragEnd}
+            onDragStart={this.onDragStart}>
+            <Droppable droppableId="open_tasks">
+            {(provided, snapshot) => (
+              <div className={style.open_tasks}
+                ref={provided.innerRef}>
+                <div className={style.add_new_task}>
+                  <IconButton
+                    onClick={this.openDialog}>
+                    <span className="material-icons">add_box</span>
+                  </IconButton>
+                  <hr className={style.separator}/>
+                  {OpenTasks}
+                  {provided.placeholder}
+                </div>
+              </div>
+            )}
+            </Droppable>
+            <Droppable droppableId="done_tasks">
+            {(provided, snapshot) => (
+              <div className={style.done_tasks}
+                ref={provided.innerRef}>
+                {DoneTasks}
+                {provided.placeholder}
+              </div>
+            )}
+            </Droppable>
+          </DragDropContext>
         </div>
         <Dialog open={this.state.dialogActive}
           onClose={this.closeDialog}
@@ -134,6 +186,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getTasks() {
       dispatch(getTasks());
+    },
+    toggleTaskStatus(id) {
+      dispatch(toggleTaskStatus(id));
     },
     createTask(data) {
       dispatch(createTask(data));

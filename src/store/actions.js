@@ -1,3 +1,4 @@
+import {store} from './store';
 import {loginCheck, loginUser, logoutUser} from '../api/user';
 import {
   tasks,
@@ -129,4 +130,29 @@ export function createTask(data) {
       });
     }
   }
+}
+
+export function editTask(data) {
+  return async (dispatch) => {
+    const task = await edit({
+      id: data.id,
+      description: data.description,
+      date: "2020-11-06",
+      alarm: "2020-11-06",
+      archived: data.done,
+    });
+    
+    dispatch({
+      type: EDIT_TASK_SUCCESS,
+      data: task,
+    })
+  }
+}
+
+export function toggleTaskStatus(id) {
+  const task = store.getState().tasks.data.find((el) => {
+    return el.id === id;
+  });
+  const updatedTask = {...task, done: !task.archived};
+  return editTask(updatedTask);
 }
